@@ -30,7 +30,11 @@ public class PosServiceImp implements PosService, Serializable {
 
     @Override
     public void checkout(Cart cart) {
-
+        cart.emptyList();
+    }
+    @Override
+    public void cancel(Cart cart) {
+        cart.emptyList();
     }
 
     @Override
@@ -45,6 +49,12 @@ public class PosServiceImp implements PosService, Serializable {
         if (product == null) return cart;
 
         cart.addItem(new Item(product, amount));
+        return cart;
+    }
+
+    @Override
+    public Cart delete(Cart cart, String productId) {
+        add(cart,productId,-cart.getItem(productId).getQuantity());
         return cart;
     }
 
